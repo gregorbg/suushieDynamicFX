@@ -72,7 +72,6 @@ public class NodeParser {
     }
 
     public <T extends Node> T parse(String fxmlString) throws IOException {
-        for (Package p : Package.getPackages()) if (p.getName().startsWith("javafx")) System.out.println(p.getName());
         return this.loader.load(new ByteArrayInputStream(fxmlString.getBytes()));
     }
 }
