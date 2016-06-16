@@ -1,10 +1,8 @@
 package com.suushiemaniac.gui.javafx.dynamic;
 
-import com.suushiemaniac.lang.json.JSON;
 import com.suushiemaniac.lang.json.value.JSONType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -58,17 +56,7 @@ public class NodeParser {
             }
         }
 
-        T element = this.parse(String.join("\n", HEADER, String.join("\n", xmlImports), jsonElement.toXMLString()));
-
-        if (element instanceof Pane) {
-            JSONType children = jsonNode.getOrDefault("children", JSON.fromJSONString("[]"));
-            
-            for (JSONType child : children) {
-                ((Pane) element).getChildren().add(parseFromJSON(child));
-            }
-        }
-
-        return element;
+        return this.parse(String.join("\n", HEADER, String.join("\n", xmlImports), jsonElement.toXMLString()));
     }
 
     public <T extends Node> T parse(String fxmlString) throws IOException {
